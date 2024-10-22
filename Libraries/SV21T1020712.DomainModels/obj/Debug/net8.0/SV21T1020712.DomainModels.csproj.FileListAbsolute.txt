@@ -1,0 +1,11 @@
+/Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/bin/Debug/net8.0/SV21T1020712.DomainModels.deps.json
+/Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/bin/Debug/net8.0/SV21T1020712.DomainModels.dll
+/Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/bin/Debug/net8.0/SV21T1020712.DomainModels.pdb
+/Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/obj/Debug/net8.0/SV21T1020712.DomainModels.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/obj/Debug/net8.0/SV21T1020712.DomainModels.AssemblyInfoInputs.cache
+/Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/obj/Debug/net8.0/SV21T1020712.DomainModels.AssemblyInfo.cs
+/Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/obj/Debug/net8.0/SV21T1020712.DomainModels.csproj.CoreCompileInputs.cache
+/Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/obj/Debug/net8.0/SV21T1020712.DomainModels.dll
+/Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/obj/Debug/net8.0/refint/SV21T1020712.DomainModels.dll
+/Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/obj/Debug/net8.0/SV21T1020712.DomainModels.pdb
+/Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/obj/Debug/net8.0/ref/SV21T1020712.DomainModels.dll
