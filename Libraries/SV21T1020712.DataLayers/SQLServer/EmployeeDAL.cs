@@ -17,9 +17,15 @@ namespace SV21T1020712.DataLayers.SQLServer
             int id = 0;
             using (var connection = OpenConnection())
             {
-                var sql = @"insert into Employees(FullName,BirthDate,Phone,Email,Address,Password,Photo,IsWorking)
-                    values(@FullName,@BirthDate,@Phone,@Email,@Address,@Password,@Photo,@IsWorking);
-                    select SCOPE_IDENTITY()";
+                var sql = @"if exists(select * from Employees where Email = @Email)
+                                select -1
+                            else
+                            begin
+                                insert into Employees(FullName,BirthDate,Phone,Email,Address,Password,Photo,IsWorking)
+                                values(@FullName,@BirthDate,@Phone,@Email,@Address,@Password,@Photo,@IsWorking);
+                                select SCOPE_IDENTITY();
+                             end
+                            ";
 
                 var parameters = new
                 {
@@ -146,16 +152,22 @@ namespace SV21T1020712.DataLayers.SQLServer
             bool result = false;
             using (var connection = OpenConnection())
             {
-                var sql = @"update Employees
-                    set FullName = @FullName,
-                        BirthDate= @BirthDate,
-                        Address=@Address,
-                        Phone=@Phone,
-                        Email=@Email,
-                        Password=@Password,
-                        Photo=@Photo,
-                        IsWorking=@IsWorking
-                    where EmployeeID = @EmployeeID";
+                var sql = @"
+                if not exists(select * from Employees where EmployeeID <> @EmployeeID and Email = @email)
+                                begin
+
+                    update Employees
+                        set FullName = @FullName,
+                            BirthDate= @BirthDate,
+                            Address=@Address,
+                            Phone=@Phone,
+                            Email=@Email,
+                            Password=@Password,
+                            Photo=@Photo,
+                            IsWorking=@IsWorking
+                        where EmployeeID = @EmployeeID
+                    end
+                    ";
                 var parameters = new
                 {
                     EmployeeID = data.EmployeeID,
