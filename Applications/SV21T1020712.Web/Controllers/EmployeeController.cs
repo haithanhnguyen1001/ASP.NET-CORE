@@ -26,16 +26,52 @@ public class EmployeeController : Controller
   public IActionResult Create()
   {
     ViewBag.Title = "Bổ sung thông tin nhân viên";
-    return View();
+    var data = new Employee()
+    {
+      EmployeeID = 0,
+      IsWorking = true,
+    };
+    return View(data);
   }
   public IActionResult Edit(int id = 0)
   {
     ViewBag.Title = "Chỉnh sửa thông tin nhân viên";
-    return View();
+    var data = CommonDataService.GetEmployee(id);
+    if (data == null)
+    {
+      return RedirectToAction("Index");
+    }
+    return View(data);
+
   }
   public IActionResult Delete(int id = 0)
   {
+    if (Request.Method == "POST")
+    {
+      CommonDataService.DeleteEmployee(id);
+      return RedirectToAction("Index");
+    }
     ViewBag.Title = "Xoá thông tin nhân viên";
-    return View();
+    var data = CommonDataService.GetEmployee(id);
+    if (data == null)
+    {
+      return RedirectToAction("Index");
+    }
+    return View(data);
   }
+
+  [HttpPost]
+  public IActionResult Save(Employee data)
+  {
+    if (data.EmployeeID == 0)
+    {
+      CommonDataService.AddEmployee(data);
+    }
+    else
+    {
+      CommonDataService.UpdateEmployee(data);
+    }
+    return RedirectToAction("Index");
+  }
+
 }

@@ -199,6 +199,35 @@ namespace SV21T1020712.BusinessLayers
             return employeeDB.List(page, pageSize, searchValue);
         }
 
+        public static Employee? GetEmployee(int id)
+        {
+            return employeeDB.Get(id);
+        }
+
+        public static int AddEmployee(Employee data)
+        {
+            return employeeDB.Add(data);
+        }
+
+        public static bool UpdateEmployee(Employee data)
+        {
+            return employeeDB.Update(data);
+        }
+
+        public static bool DeleteEmployee(int id)
+        {
+            if (employeeDB.InUsed(id))
+            {
+                return false;
+            }
+            return employeeDB.Delete(id);
+        }
+
+        public static bool InUsedEmployee(int id)
+        {
+            return employeeDB.InUsed(id);
+        }
+
 
 
     }

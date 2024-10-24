@@ -25,11 +25,12 @@ namespace SV21T1020712.DataLayers.SQLServer
                 {
                     FullName = data.FullName ?? "",
                     BirthDate = data.BirthDate,
-                    Phone = data.Phone,
-                    Email = data.Email,
-                    Address = data.Address,
-                    Password = data.Password,
-                    Photo = data.Photo
+                    Phone = data.Phone ?? "",
+                    Email = data.Email ?? "",
+                    Address = data.Address ?? "",
+                    Password = data.Password ?? "",
+                    Photo = data.Photo ?? "",
+                    IsWorking = data.IsWorking
                 };
                 //Thực thi câu lệnh SQL
                 id = connection.ExecuteScalar<int>(sql: sql, param: parameters, commandType: System.Data.CommandType.Text);
@@ -60,17 +61,58 @@ namespace SV21T1020712.DataLayers.SQLServer
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            using (var connection = OpenConnection())
+            {
+                var sql = @"delete from Employees where EmployeeID = @EmployeeID";
+                var parameters = new
+                {
+                    EmployeeID = id,
+                };
+                result = connection.Execute(sql: sql, param: parameters, commandType: System.Data.CommandType.Text) > 0;
+
+                connection.Close();
+            }
+            return result;
+
         }
 
         public Employee? Get(int id)
         {
-            throw new NotImplementedException();
+            Employee? data = null;
+            using (var connection = OpenConnection())
+            {
+                var sql = @"select * from Employees where EmployeeID = @EmployeeID";
+                var parameters = new
+                {
+                    EmployeeID = id
+                };
+                data = connection.QueryFirstOrDefault<Employee>(sql: sql, param: parameters, commandType: System.Data.CommandType.Text);
+                connection.Close();
+            }
+            return data;
+
         }
 
         public bool InUsed(int id)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            using (var connection = OpenConnection())
+            {
+                var sql = @"if exists(select * from Orders where EmployeeID = @EmployeeID)
+                        select 1
+                    else
+                        select 0";
+                var parameters = new
+                {
+                    EmployeeID = id
+                };
+                result = connection.ExecuteScalar<bool>(sql: sql, param: parameters, commandType: System.Data.CommandType.Text);
+                connection.Close();
+
+            }
+            return result;
+
         }
 
         public List<Employee> List(int page = 1, int pageSize = 0, string searchValue = "")
@@ -101,7 +143,36 @@ namespace SV21T1020712.DataLayers.SQLServer
 
         public bool Update(Employee data)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            using (var connection = OpenConnection())
+            {
+                var sql = @"update Employees
+                    set FullName = @FullName,
+                        BirthDate= @BirthDate,
+                        Address=@Address,
+                        Phone=@Phone,
+                        Email=@Email,
+                        Password=@Password,
+                        Photo=@Photo,
+                        IsWorking=@IsWorking
+                    where EmployeeID = @EmployeeID";
+                var parameters = new
+                {
+                    EmployeeID = data.EmployeeID,
+                    FullName = data.FullName ?? "",
+                    BirthDate = data.BirthDate,
+                    Address = data.Address ?? "",
+                    Phone = data.Phone ?? "",
+                    Email = data.Email ?? "",
+                    Password = data.Password ?? "",
+                    Photo = data.Photo ?? "",
+                    IsWorking = data.IsWorking
+                };
+                result = connection.Execute(sql: sql, param: parameters, commandType: System.Data.CommandType.Text) > 0;
+                connection.Close();
+            }
+            return result;
+
         }
     }
 }
