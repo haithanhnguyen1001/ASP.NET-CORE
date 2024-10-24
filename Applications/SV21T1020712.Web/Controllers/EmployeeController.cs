@@ -30,8 +30,9 @@ public class EmployeeController : Controller
     {
       EmployeeID = 0,
       IsWorking = true,
+      Photo = "photo.png"
     };
-    return View(data);
+    return View("Edit", data);
   }
   public IActionResult Edit(int id = 0)
   {
@@ -61,8 +62,23 @@ public class EmployeeController : Controller
   }
 
   [HttpPost]
-  public IActionResult Save(Employee data)
+  public IActionResult Save(Employee data, string _BirthDate, IFormFile? _Photo)
   {
+    //Xử lí cho ngày sinh
+    DateTime? d = _BirthDate.ToDateTime();
+    if (d.HasValue)
+      data.BirthDate = d.Value;
+    //Xử lí với ảnh
+    if (_Photo != null)
+    {
+      string fileName = $"{DateTime.Now.Ticks}-{_Photo.FileName}";
+      string filePath = Path.Combine(ApplicationContext.WebRootPath, @"images/employees", fileName);
+      using (var stream = new FileStream(filePath, FileMode.Create))
+      {
+        _Photo.CopyTo(stream);
+      }
+      data.Photo = fileName;
+    }
     if (data.EmployeeID == 0)
     {
       CommonDataService.AddEmployee(data);

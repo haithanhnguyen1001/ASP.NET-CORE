@@ -45,7 +45,7 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <img class="profile-user-img img-responsive img-bordered"
-                                        src=@(item.Photo == "" ? "/themes/dist/img/user4-128x128.jpg" : item.Photo) >
+                                        src=@((item.Photo == "" || item.Photo == null) ? "/themes/dist/img/user4-128x128.jpg" : item.Photo) >
                                 </div>
                                 <div class="col-sm-8">
                                     <ul class="list-group list-group-unbordered">
