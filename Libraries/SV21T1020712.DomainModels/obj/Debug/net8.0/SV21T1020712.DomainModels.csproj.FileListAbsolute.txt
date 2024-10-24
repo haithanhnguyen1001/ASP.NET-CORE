@@ -9,3 +9,4 @@
 /Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/obj/Debug/net8.0/refint/SV21T1020712.DomainModels.dll
 /Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/obj/Debug/net8.0/SV21T1020712.DomainModels.pdb
 /Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/obj/Debug/net8.0/ref/SV21T1020712.DomainModels.dll
+/Users/nhthanh/SV21T1020712/Libraries/SV21T1020712.DomainModels/obj/Debug/net8.0/SV21T1020712.DomainModels.sourcelink.json

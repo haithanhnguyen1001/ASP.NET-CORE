@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc;
 using SV21T1020712.BusinessLayers;
+using SV21T1020712.DomainModels;
 using SV21T1020712.Web.Models;
 
 namespace SV21T1020712.Web.Controllers;
@@ -26,16 +27,51 @@ public class SupplierController : Controller
   public IActionResult Create()
   {
     ViewBag.Title = "Bổ sung thông tin nhà cung cấp";
-    return View("Edit");
+    var data = new Supplier()
+    {
+      SupplierID = 0
+    };
+    return View("Edit", data);
   }
   public IActionResult Edit(int id = 0)
   {
     ViewBag.Title = "Chỉnh sửa thông tin nhà cung cấp";
-    return View();
+    var data = CommonDataService.GetSupplier(id);
+    if (data == null)
+    {
+      return RedirectToAction("Index");
+    }
+    return View(data);
   }
   public IActionResult Delete(int id = 0)
   {
     ViewBag.Title = "Xoá thông tin nhà cung cấp";
-    return View();
+    if (Request.Method == "POST")
+    {
+      CommonDataService.DeleteSupplier(id);
+      return RedirectToAction("Index");
+
+    }
+    var data = CommonDataService.GetSupplier(id);
+    if (data == null)
+    {
+      return RedirectToAction("Index");
+    }
+    return View(data);
   }
+  [HttpPost]
+  public IActionResult Save(Supplier data)
+  {
+    if (data.SupplierID == 0)
+    {
+      CommonDataService.AddSupplier(data);
+    }
+    else
+    {
+      CommonDataService.UpdateSupplier(data);
+    }
+    return RedirectToAction("Index");
+  }
+
+
 }

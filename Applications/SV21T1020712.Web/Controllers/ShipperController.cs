@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SV21T1020712.BusinessLayers;
+using SV21T1020712.DomainModels;
 using SV21T1020712.Web.Models;
 
 namespace SV21T1020712.Web.Controllers;
@@ -26,16 +27,48 @@ public class ShipperController : Controller
   public IActionResult Create()
   {
     ViewBag.Title = "Bổ sung thông tin người giao hàng";
-    return View("Edit");
+    var data = new Shipper()
+    {
+      ShipperID = 0
+    };
+    return View("Edit", data);
   }
   public IActionResult Edit(int id = 0)
   {
     ViewBag.Title = "Chỉnh sửa thông tin người giao hàng";
-    return View();
+    var data = CommonDataService.GetShipper(id);
+    if (data == null)
+    {
+      return RedirectToAction("Index");
+    }
+    return View(data);
   }
   public IActionResult Delete(int id = 0)
   {
+    if (Request.Method == "POST")
+    {
+      CommonDataService.DeleteShipper(id);
+      return RedirectToAction("Index");
+    }
     ViewBag.Title = "Xoá thông tin người giao hàng";
-    return View();
+    var data = CommonDataService.GetShipper(id);
+    if (data == null)
+    {
+      return RedirectToAction("Index");
+    }
+    return View(data);
+  }
+  [HttpPost]
+  public IActionResult Save(Shipper data)
+  {
+    if (data.ShipperID == 0)
+    {
+      CommonDataService.AddShipper(data);
+    }
+    else
+    {
+      CommonDataService.UpdateShipper(data);
+    }
+    return RedirectToAction("Index");
   }
 }

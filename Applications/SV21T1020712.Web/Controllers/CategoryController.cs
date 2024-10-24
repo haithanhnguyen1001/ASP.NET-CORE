@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SV21T1020712.BusinessLayers;
+using SV21T1020712.DomainModels;
 using SV21T1020712.Web.Models;
 
 namespace SV21T1020712.Web.Controllers;
@@ -26,16 +27,50 @@ public class CategoryController : Controller
   public IActionResult Create()
   {
     ViewBag.Title = "Bổ sung thông tin loại hàng";
-    return View("Edit");
+    var data = new Category()
+    {
+      CategoryID = 0
+    };
+    return View("Edit", data);
   }
   public IActionResult Edit(int id = 0)
   {
     ViewBag.Title = "Chỉnh sửa thông tin loại hàng";
-    return View();
+    var data = CommonDataService.GetCategory(id);
+    if (data == null)
+    {
+      return RedirectToAction("Index");
+    }
+    return View(data);
   }
   public IActionResult Delete(int id = 0)
   {
     ViewBag.Title = "Xoá thông tin loại hàng";
-    return View();
+    if (Request.Method == "POST")
+    {
+      CommonDataService.DeleteCategory(id);
+      return RedirectToAction("Index");
+    }
+    var data = CommonDataService.GetCategory(id);
+    if (data == null)
+    {
+      return RedirectToAction("Index");
+    }
+    return View(data);
   }
+
+  [HttpPost]
+  public IActionResult Save(Category data)
+  {
+    if (data.CategoryID == 0)
+    {
+      CommonDataService.AddCategory(data);
+    }
+    else
+    {
+      CommonDataService.UpdateCategory(data);
+    }
+    return RedirectToAction("Index");
+  }
+
 }

@@ -93,16 +93,106 @@ namespace SV21T1020712.BusinessLayers
             rowCount = shipperDB.Count(searchValue);
             return shipperDB.List(page, pageSize, searchValue);
         }
+
+        public static Shipper? GetShipper(int id)
+        {
+            return shipperDB.Get(id);
+        }
+
+        public static int AddShipper(Shipper data)
+        {
+            return shipperDB.Add(data);
+        }
+
+        public static bool UpdateShipper(Shipper data)
+        {
+            return shipperDB.Update(data);
+        }
+
+        public static bool DeleteShipper(int id)
+        {
+            if (shipperDB.InUsed(id))
+            {
+                return false;
+            }
+            return shipperDB.Delete(id);
+        }
+
+        public static bool InUsedShipper(int id)
+        {
+            return shipperDB.InUsed(id);
+        }
+
         public static List<Supplier> ListOfSuppliers(out int rowCount, int page = 1, int pageSize = 0, string searchValue = "")
         {
             rowCount = supplierDB.Count(searchValue);
             return supplierDB.List(page, pageSize, searchValue);
         }
+        public static Supplier? GetSupplier(int id)
+        {
+            return supplierDB.Get(id);
+        }
+
+        public static int AddSupplier(Supplier data)
+        {
+            return supplierDB.Add(data);
+        }
+
+        public static bool UpdateSupplier(Supplier data)
+        {
+            return supplierDB.Update(data);
+        }
+
+        public static bool DeleteSupplier(int id)
+        {
+            if (supplierDB.InUsed(id))
+            {
+                return false;
+            }
+            return supplierDB.Delete(id);
+        }
+
+        public static bool InUsedSupplier(int id)
+        {
+            return supplierDB.InUsed(id);
+        }
+
         public static List<Category> ListOfCategories(out int rowCount, int page = 1, int pageSize = 0, string searchValue = "")
         {
             rowCount = categoryDB.Count(searchValue);
             return categoryDB.List(page, pageSize, searchValue);
         }
+        public static Category? GetCategory(int id)
+        {
+            return categoryDB.Get(id);
+        }
+
+        public static int AddCategory(Category data)
+        {
+            return categoryDB.Add(data);
+        }
+
+        public static bool UpdateCategory(Category data)
+        {
+            return categoryDB.Update(data);
+        }
+        public static bool DeleteCategory(int id)
+        {
+            if (categoryDB.InUsed(id))
+            {
+                return false;
+            }
+            return categoryDB.Delete(id);
+        }
+
+        public static bool InUsedCategory(int id)
+        {
+            return categoryDB.InUsed(id);
+        }
+
+
+
+
         public static List<Employee> ListOfEmployees(out int rowCount, int page = 1, int pageSize = 0, string searchValue = "")
         {
             rowCount = employeeDB.Count(searchValue);

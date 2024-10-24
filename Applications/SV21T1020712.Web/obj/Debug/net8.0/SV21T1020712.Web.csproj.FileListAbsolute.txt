@@ -73,3 +73,4 @@
 /Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/obj/Debug/net8.0/SV21T1020712.Web.pdb
 /Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/obj/Debug/net8.0/SV21T1020712.Web.genruntimeconfig.cache
 /Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/obj/Debug/net8.0/ref/SV21T1020712.Web.dll
+/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/obj/Debug/net8.0/SV21T1020712.Web.sourcelink.json

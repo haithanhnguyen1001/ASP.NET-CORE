@@ -14,7 +14,29 @@ namespace SV21T1020712.DataLayers.SQLServer
 
         public int Add(Employee data)
         {
-            throw new NotImplementedException();
+            int id = 0;
+            using (var connection = OpenConnection())
+            {
+                var sql = @"insert into Employees(FullName,BirthDate,Phone,Email,Address,Password,Photo,IsWorking)
+                    values(@FullName,@BirthDate,@Phone,@Email,@Address,@Password,@Photo,@IsWorking);
+                    select SCOPE_IDENTITY()";
+
+                var parameters = new
+                {
+                    FullName = data.FullName ?? "",
+                    BirthDate = data.BirthDate,
+                    Phone = data.Phone,
+                    Email = data.Email,
+                    Address = data.Address,
+                    Password = data.Password,
+                    Photo = data.Photo
+                };
+                //Thực thi câu lệnh SQL
+                id = connection.ExecuteScalar<int>(sql: sql, param: parameters, commandType: System.Data.CommandType.Text);
+                connection.Close();
+            }
+            return id;
+
         }
 
         public int Count(string searchValue = "")
