@@ -50,7 +50,7 @@
                                 <div class="col-sm-8">
                                     <ul class="list-group list-group-unbordered">
                                         <li class="list-group-item">
-                                            <i class="fa fa-birthday-cake"></i> @item.BirthDate
+                                            <i class="fa fa-birthday-cake"></i> @item.BirthDate.ToString("dd/MM/yyyy", new System.Globalization.CultureInfo("en-GB"))
                                         </li>
                                         <li class="list-group-item">
                                             <i class="fa fa-phone"></i> @item.Phone
