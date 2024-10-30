@@ -24,8 +24,7 @@ namespace SV21T1020712.DataLayers.SQLServer
                                 insert into Employees(FullName,BirthDate,Phone,Email,Address,Password,Photo,IsWorking)
                                 values(@FullName,@BirthDate,@Phone,@Email,@Address,@Password,@Photo,@IsWorking);
                                 select SCOPE_IDENTITY();
-                             end
-                            ";
+                             end";
 
                 var parameters = new
                 {
@@ -153,9 +152,8 @@ namespace SV21T1020712.DataLayers.SQLServer
             using (var connection = OpenConnection())
             {
                 var sql = @"
-                if not exists(select * from Employees where EmployeeID <> @EmployeeID and Email = @email)
-                                begin
-
+                if not exists(select * from Employees where EmployeeID <> @EmployeeID and Email = @Email)
+                begin
                     update Employees
                         set FullName = @FullName,
                             BirthDate= @BirthDate,
@@ -166,8 +164,7 @@ namespace SV21T1020712.DataLayers.SQLServer
                             Photo=@Photo,
                             IsWorking=@IsWorking
                         where EmployeeID = @EmployeeID
-                    end
-                    ";
+                end";
                 var parameters = new
                 {
                     EmployeeID = data.EmployeeID,
