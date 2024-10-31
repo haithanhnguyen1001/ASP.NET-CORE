@@ -98,13 +98,42 @@ public class CustomerController : Controller
   [HttpPost]
   public IActionResult Save(Customer data)
   {
+    ViewBag.Title = data.CustomerID == 0 ? "Bổ sung khách hàng mới" : "Cập nhật thông tin khách hàng";
+    //Kiểm tra nếu dữ liệu đầu vào không hợp lệ thì tạo ra một thông báo lỗi và lưu trữ vào ModelState
+    if (string.IsNullOrWhiteSpace(data.CustomerName))
+      ModelState.AddModelError(nameof(data.CustomerName), "Tên khách hàng không được để trống");
+    if (string.IsNullOrWhiteSpace(data.ContactName))
+      ModelState.AddModelError(nameof(data.ContactName), "Tên giao dịch không được để trống");
+    if (string.IsNullOrWhiteSpace(data.Phone))
+      ModelState.AddModelError(nameof(data.Phone), "Vui lòng nhập điện thoại của khách hàng");
+    if (string.IsNullOrWhiteSpace(data.Email))
+      ModelState.AddModelError(nameof(data.Email), "Vui lòng nhập email của khách hàng");
+    if (string.IsNullOrWhiteSpace(data.Address))
+      ModelState.AddModelError(nameof(data.Address), "Vui lòng nhập địa chỉ của khách hàng");
+    if (string.IsNullOrWhiteSpace(data.Province))
+      ModelState.AddModelError(nameof(data.Province), "Hãy chọn tỉnh/thành cho khách hàng");
+    //Dựa vào thuộc tính IsValid của ModelState để biết có tồn tại lỗi hay không?
+    if (ModelState.IsValid == false)
+    {
+      return View("Edit", data);
+    }
     if (data.CustomerID == 0)
     {
-      CommonDataService.AddCustomer(data);
+      int id = CommonDataService.AddCustomer(data);
+      if (id <= 0)
+      {
+        ModelState.AddModelError(nameof(data.Email), "Email bị trùng");
+        return View("Edit", data);
+      }
     }
     else
     {
-      CommonDataService.UpdateCustomer(data);
+      bool result = CommonDataService.UpdateCustomer(data);
+      if (result == false)
+      {
+        ModelState.AddModelError(nameof(data.Email), "Email bị trùng");
+        return View("Edit", data);
+      }
     }
     return RedirectToAction("Index");
   }
