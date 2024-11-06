@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,76 +30,84 @@
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   @RenderSection("styles", false)
+  <style>
+    .field-validation-error {
+      color: red
+    }
+  </style>
 </head>
+
 <body class="hold-transition skin-blue sidebar-mini">
-<!-- Site wrapper -->
-<div class="wrapper">
+  <!-- Site wrapper -->
+  <div class="wrapper">
 
 
 
-  <!-- =============================================== -->
+    <!-- =============================================== -->
 
-  <!-- Left side column. contains the sidebar -->
+    <!-- Left side column. contains the sidebar -->
     @{
       await Html.RenderPartialAsync("_Header");
       await Html.RenderPartialAsync("_SideBar");
     }
 
-  <!-- =============================================== -->
+    <!-- =============================================== -->
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <section class="content-header">
-      <h1>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <section class="content-header">
+        <h1>
           @ViewBag.Title
-      </h1>
-    </section>
-    <section class="content">
+        </h1>
+      </section>
+      <section class="content">
         @RenderBody()
-    </section>
-  </div>
+      </section>
+    </div>
     @{
       await Html.RenderPartialAsync("_Footer");
       //await Html.RenderPartialAsync("_ControlSideBar");
     }
 
 
-</div>
-<!-- ./wrapper -->
+  </div>
+  <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
-<script src="~/themes/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="~/themes/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="~/themes/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="~/themes/bower_components/fastclick/lib/fastclick.js"></script>
-<script src="~/themes/bower_components/moment/min/moment.min.js"></script>
-<script src="~/themes/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="~/themes/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="~/themes/bower_components//select2/dist/js/select2.min.js"></script>
-<!-- AdminLTE App -->
-<script src="~/themes/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="~/themes/dist/js/demo.js"></script>
-<script>
-        $(document).ready(function () {
-                  $('.sidebar-menu').tree();
-                  $('.date-picker').datepicker({
-                      autoclose: true,
-                      format: "dd/mm/yyyy"
-                  });
-                  $('.daterange-picker').daterangepicker({
-                      locale: {
-                          format: 'DD/MM/YYYY'
-                      }
-                  });
-                  $('.select2').select2();
-              })
-</script>
+  <!-- jQuery 3 -->
+  <script src="~/themes/bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="~/themes/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- SlimScroll -->
+  <script src="~/themes/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+  <!-- FastClick -->
+  <script src="~/themes/bower_components/fastclick/lib/fastclick.js"></script>
+  <script src="~/themes/bower_components/moment/min/moment.min.js"></script>
+  <script src="~/themes/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="~/themes/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+  <script src="~/themes/bower_components//select2/dist/js/select2.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="~/themes/dist/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="~/themes/dist/js/demo.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.sidebar-menu').tree();
+      $('.date-picker').datepicker({
+        autoclose: true,
+        format: "dd/mm/yyyy"
+      });
+      $('.daterange-picker').daterangepicker({
+        locale: {
+          format: 'DD/MM/YYYY'
+        }
+      });
+      $('.select2').select2();
+    })
+  </script>
   @RenderSection("scripts", false)
 </body>
+
 </html>
