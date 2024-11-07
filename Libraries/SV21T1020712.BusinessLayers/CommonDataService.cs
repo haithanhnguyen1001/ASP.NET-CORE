@@ -13,7 +13,7 @@ namespace SV21T1020712.BusinessLayers
         private static readonly ISimpleQueryDAL<Province> provinceDB;
         static CommonDataService()
         {
-            string connectionString = @"server=.;user id=sa;password=Password123456789;database=LiteCommerceDB;TrustServerCertificate=true";
+            string connectionString = Configuration.ConnectionString;
             customerDB = new DataLayers.SQLServer.CustomerDAL(connectionString);
             shipperDB = new DataLayers.SQLServer.ShipperDAL(connectionString);
             supplierDB = new DataLayers.SQLServer.SupplierDAL(connectionString);
@@ -222,6 +222,11 @@ namespace SV21T1020712.BusinessLayers
             }
             return employeeDB.Delete(id);
         }
+        /// <summary>
+        /// Kiểm tra xem nhân viên có mã id hiện có dữ liệu liên quan hay không?
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         public static bool InUsedEmployee(int id)
         {

@@ -9,23 +9,6 @@ public class CustomerController : Controller
 {
   private const int PAGE_SIZE = 20;
   private const string CUSTOMER_SEARCH_CONDITION = "CustomerSearchCondition";
-  // public IActionResult Index(int page = 1, string searchValue = "")
-  // {
-  //   int rowCount;
-  //   var data = CommonDataService.ListOfCustomers(out rowCount, page, PAGE_SIZE, searchValue ?? "");
-  //   int pageCount = 1;
-  //   pageCount = rowCount / PAGE_SIZE;
-  //   if (rowCount % PAGE_SIZE > 0)
-  //   {
-  //     pageCount += 1;
-  //   }
-  //   ViewBag.Page = page;
-  //   ViewBag.RowCount = rowCount;
-  //   ViewBag.PageCount = pageCount;
-  //   ViewBag.SearchValue = searchValue;
-  //   return View(data);
-  // }
-
   public IActionResult Index()
   {
     PaginationSearchInput? condition = ApplicationContext.GetSessionData<PaginationSearchInput>(CUSTOMER_SEARCH_CONDITION);
@@ -110,32 +93,41 @@ public class CustomerController : Controller
       ModelState.AddModelError(nameof(data.Email), "Vui lòng nhập email của khách hàng");
     if (string.IsNullOrWhiteSpace(data.Address))
       ModelState.AddModelError(nameof(data.Address), "Vui lòng nhập địa chỉ của khách hàng");
-    if (string.IsNullOrWhiteSpace(data.Province))
+    if (string.IsNullOrEmpty(data.Province))
       ModelState.AddModelError(nameof(data.Province), "Hãy chọn tỉnh/thành cho khách hàng");
     //Dựa vào thuộc tính IsValid của ModelState để biết có tồn tại lỗi hay không?
     if (ModelState.IsValid == false)
     {
       return View("Edit", data);
     }
-    if (data.CustomerID == 0)
+    try
     {
-      int id = CommonDataService.AddCustomer(data);
-      if (id <= 0)
+      if (data.CustomerID == 0)
       {
-        ModelState.AddModelError(nameof(data.Email), "Email bị trùng");
-        return View("Edit", data);
+        int id = CommonDataService.AddCustomer(data);
+        if (id <= 0)
+        {
+          ModelState.AddModelError(nameof(data.Email), "Email bị trùng");
+          return View("Edit", data);
+        }
       }
+      else
+      {
+        bool result = CommonDataService.UpdateCustomer(data);
+        if (result == false)
+        {
+          ModelState.AddModelError(nameof(data.Email), "Email bị trùng");
+          return View("Edit", data);
+        }
+      }
+      return RedirectToAction("Index");
     }
-    else
+    catch
     {
-      bool result = CommonDataService.UpdateCustomer(data);
-      if (result == false)
-      {
-        ModelState.AddModelError(nameof(data.Email), "Email bị trùng");
-        return View("Edit", data);
-      }
+      ModelState.AddModelError("Error", "Hệ thống tạm thời gián đoạn");
+      return View("Edit");
     }
-    return RedirectToAction("Index");
+
   }
 
 }

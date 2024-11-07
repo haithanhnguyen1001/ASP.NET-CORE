@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Dapper;
 using SV21T1020712.DomainModels;
 
