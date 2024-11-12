@@ -110,32 +110,39 @@ public class CustomerController : Controller
       ModelState.AddModelError(nameof(data.Email), "Vui lòng nhập email của khách hàng");
     if (string.IsNullOrWhiteSpace(data.Address))
       ModelState.AddModelError(nameof(data.Address), "Vui lòng nhập địa chỉ của khách hàng");
-    if (string.IsNullOrWhiteSpace(data.Province))
+    if (string.IsNullOrEmpty(data.Province))
       ModelState.AddModelError(nameof(data.Province), "Hãy chọn tỉnh/thành cho khách hàng");
     //Dựa vào thuộc tính IsValid của ModelState để biết có tồn tại lỗi hay không?
     if (ModelState.IsValid == false)
     {
       return View("Edit", data);
     }
-    if (data.CustomerID == 0)
+    try
     {
-      int id = CommonDataService.AddCustomer(data);
-      if (id <= 0)
+      if (data.CustomerID == 0)
       {
-        ModelState.AddModelError(nameof(data.Email), "Email bị trùng");
-        return View("Edit", data);
+        int id = CommonDataService.AddCustomer(data);
+        if (id <= 0)
+        {
+          ModelState.AddModelError(nameof(data.Email), "Email bị trùng");
+          return View("Edit", data);
+        }
       }
+      else
+      {
+        bool result = CommonDataService.UpdateCustomer(data);
+        if (result == false)
+        {
+          ModelState.AddModelError(nameof(data.Email), "Email bị trùng");
+          return View("Edit", data);
+        }
+      }
+      return RedirectToAction("Index");
     }
-    else
+    catch
     {
-      bool result = CommonDataService.UpdateCustomer(data);
-      if (result == false)
-      {
-        ModelState.AddModelError(nameof(data.Email), "Email bị trùng");
-        return View("Edit", data);
-      }
+      ModelState.AddModelError("Error", "Hệ thống tạm thời gián đoạn");
+      return View("Edit");
     }
-    return RedirectToAction("Index");
   }
-
 }

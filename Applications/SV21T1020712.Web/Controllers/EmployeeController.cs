@@ -30,7 +30,7 @@ public class EmployeeController : Controller
     {
       EmployeeID = 0,
       IsWorking = true,
-      Photo = "photo.png"
+      Photo = "nophoto.png"
     };
     return View("Edit", data);
   }
