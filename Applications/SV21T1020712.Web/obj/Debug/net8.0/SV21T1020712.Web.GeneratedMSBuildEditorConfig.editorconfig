@@ -38,6 +38,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcnkvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Category/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcnkvU2VhcmNoLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Customer/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tZXIvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -72,6 +76,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Employee/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWUvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Employee/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWUvU2VhcmNoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Home/Index.cshtml]
@@ -158,6 +166,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hpcHBlci9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Shipper/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hpcHBlci9TZWFyY2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Supplier/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3VwcGxpZXIvRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -168,6 +180,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Supplier/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3VwcGxpZXIvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Supplier/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3VwcGxpZXIvU2VhcmNoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/_ViewImports.cshtml]

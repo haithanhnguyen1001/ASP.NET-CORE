@@ -8,20 +8,35 @@ namespace SV21T1020712.Web.Controllers;
 public class ShipperController : Controller
 {
   public const int PAGE_SIZE = 2;
-  public IActionResult Index(int page = 1, string searchValue = "")
+  private const string SHIPPER_SEARCH_CONDITION = "ShipperSearchCondition";
+  public IActionResult Index()
+  {
+    PaginationSearchInput? condition = ApplicationContext.GetSessionData<PaginationSearchInput>(SHIPPER_SEARCH_CONDITION);
+    if (condition == null)
+      condition = new PaginationSearchInput()
+      {
+        Page = 1,
+        PageSize = PAGE_SIZE,
+        SearchValue = ""
+      };
+    return View(condition);
+  }
+
+  public IActionResult Search(PaginationSearchInput condition)
   {
     int rowCount;
-    var data = CommonDataService.ListOfShippers(out rowCount, page, PAGE_SIZE, searchValue ?? "");
-    int pageCount = rowCount / PAGE_SIZE;
-    if (rowCount % PAGE_SIZE > 0)
+    var data = CommonDataService.ListOfShippers(out rowCount, condition.Page, condition.PageSize, condition.SearchValue ?? "");
+
+    ShipperSearchResult model = new ShipperSearchResult()
     {
-      pageCount += 1;
-    }
-    ViewBag.Page = page;
-    ViewBag.RowCount = rowCount;
-    ViewBag.PageCount = pageCount;
-    ViewBag.SearchValue = searchValue;
-    return View(data);
+      Page = condition.Page,
+      PageSize = condition.PageSize,
+      SearchValue = condition.SearchValue ?? "",
+      RowCount = rowCount,
+      Data = data
+    };
+    ApplicationContext.SetSessionData(SHIPPER_SEARCH_CONDITION, condition);
+    return View(model);
   }
 
   public IActionResult Create()
@@ -61,14 +76,48 @@ public class ShipperController : Controller
   [HttpPost]
   public IActionResult Save(Shipper data)
   {
-    if (data.ShipperID == 0)
+    ViewBag.Title = data.ShipperID == 0 ? "Bổ sung người giao hàng mới" : "Cập nhật thông tin người giao hàng";
+
+    //Kiểm tra nếu dữ liệu đầu vào không hợp lệ thì tạo ra một thông báo lỗi và lưu trữ vào ModelState
+    if (string.IsNullOrWhiteSpace(data.ShipperName))
+      ModelState.AddModelError(nameof(data.ShipperName), "Tên người giao hàng không được để trống");
+
+    if (string.IsNullOrWhiteSpace(data.Phone))
+      ModelState.AddModelError(nameof(data.Phone), "Vui lòng nhập điện thoại của người giao hàng");
+
+    if (ModelState.IsValid == false)
     {
-      CommonDataService.AddShipper(data);
+      return View("Edit", data);
     }
-    else
+
+    try
     {
-      CommonDataService.UpdateShipper(data);
+      if (data.ShipperID == 0)
+      {
+        int id = CommonDataService.AddShipper(data);
+        if (id <= 0)
+        {
+          ModelState.AddModelError(nameof(data.Phone), "Số điện thoại bị trùng");
+          return View("Edit", data);
+        }
+      }
+      else
+      {
+        bool result = CommonDataService.UpdateShipper(data);
+        if (result == false)
+        {
+          ModelState.AddModelError(nameof(data.Phone), "Số điện thoại bị trùng");
+          return View("Edit", data);
+        }
+      }
+      return RedirectToAction("Index");
     }
-    return RedirectToAction("Index");
+    catch
+    {
+      ModelState.AddModelError("Error", "Hệ thống tạm thời gián đoạn");
+      return View("Edit");
+    }
+
+
   }
 }

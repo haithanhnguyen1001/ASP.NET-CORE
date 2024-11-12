@@ -18,9 +18,15 @@ namespace SV21T1020712.DataLayers.SQLServer
             int id = 0;
             using (var connection = OpenConnection())
             {
-                var sql = @"insert into Categories(CategoryName,Description)
+                var sql = @"
+                if exists(select * from Categories where CategoryName = @CategoryName)
+                    select -1
+                else
+                begin
+                    insert into Categories(CategoryName,Description)
                     values(@CategoryName,@Description);
-                    select SCOPE_IDENTITY()";
+                    select SCOPE_IDENTITY()
+                end";
 
                 var parameters = new
                 {
@@ -142,10 +148,14 @@ namespace SV21T1020712.DataLayers.SQLServer
             bool result = false;
             using (var connection = OpenConnection())
             {
-                var sql = @"update Categories
-                    set CategoryName = @CategoryName,
-                        Description = @Description
-                    where CategoryID = @CategoryID";
+                var sql = @"
+                if not exists(select * from Categories where CategoryID <> @CategoryID and CategoryName = @CategoryName)
+                begin
+                    update Categories
+                        set CategoryName = @CategoryName,
+                            Description = @Description
+                        where CategoryID = @CategoryID
+                end";
                 var parameters = new
                 {
                     CategoryID = data.CategoryID,
@@ -156,7 +166,6 @@ namespace SV21T1020712.DataLayers.SQLServer
                 connection.Close();
             }
             return result;
-
         }
     }
 }

@@ -9,22 +9,7 @@ public class CustomerController : Controller
 {
   private const int PAGE_SIZE = 20;
   private const string CUSTOMER_SEARCH_CONDITION = "CustomerSearchCondition";
-  // public IActionResult Index(int page = 1, string searchValue = "")
-  // {
-  //   int rowCount;
-  //   var data = CommonDataService.ListOfCustomers(out rowCount, page, PAGE_SIZE, searchValue ?? "");
-  //   int pageCount = 1;
-  //   pageCount = rowCount / PAGE_SIZE;
-  //   if (rowCount % PAGE_SIZE > 0)
-  //   {
-  //     pageCount += 1;
-  //   }
-  //   ViewBag.Page = page;
-  //   ViewBag.RowCount = rowCount;
-  //   ViewBag.PageCount = pageCount;
-  //   ViewBag.SearchValue = searchValue;
-  //   return View(data);
-  // }
+
 
   public IActionResult Index()
   {

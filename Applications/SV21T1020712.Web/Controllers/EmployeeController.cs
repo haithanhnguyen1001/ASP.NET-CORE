@@ -2,25 +2,41 @@
 using Microsoft.AspNetCore.Mvc;
 using SV21T1020712.BusinessLayers;
 using SV21T1020712.DomainModels;
+using SV21T1020712.Web.Models;
 
 namespace SV21T1020712.Web.Controllers;
 public class EmployeeController : Controller
 {
   public const int PAGE_SIZE = 9;
-  public IActionResult Index(int page = 1, string searchValue = "")
+  private const string EMPLOYEE_SEARCH_CONDITION = "EmployeeSearchCondition";
+  public IActionResult Index()
+  {
+    PaginationSearchInput? condition = ApplicationContext.GetSessionData<PaginationSearchInput>(EMPLOYEE_SEARCH_CONDITION);
+    if (condition == null)
+      condition = new PaginationSearchInput()
+      {
+        Page = 1,
+        PageSize = PAGE_SIZE,
+        SearchValue = ""
+      };
+    return View(condition);
+  }
+
+  public IActionResult Search(PaginationSearchInput condition)
   {
     int rowCount;
-    var data = CommonDataService.ListOfEmployees(out rowCount, page, PAGE_SIZE, searchValue ?? "");
-    int pageCount = rowCount / PAGE_SIZE;
-    if (rowCount % PAGE_SIZE > 0)
+    var data = CommonDataService.ListOfEmployees(out rowCount, condition.Page, condition.PageSize, condition.SearchValue ?? "");
+
+    EmployeeSearchResult model = new EmployeeSearchResult()
     {
-      pageCount += 1;
-    }
-    ViewBag.Page = page;
-    ViewBag.RowCount = rowCount;
-    ViewBag.PageCount = pageCount;
-    ViewBag.SearchValue = searchValue;
-    return View(data);
+      Page = condition.Page,
+      PageSize = condition.PageSize,
+      SearchValue = condition.SearchValue ?? "",
+      RowCount = rowCount,
+      Data = data
+    };
+    ApplicationContext.SetSessionData(EMPLOYEE_SEARCH_CONDITION, condition);
+    return View(model);
   }
 
   public IActionResult Create()
@@ -64,10 +80,28 @@ public class EmployeeController : Controller
   [HttpPost]
   public IActionResult Save(Employee data, string _BirthDate, IFormFile? _Photo)
   {
+    ViewBag.Title = data.EmployeeID == 0 ? "Bổ sung nhân viên mới" : "Cập nhật thông tin nhân viên";
+    //Kiểm tra nếu dữ liệu đầu vào không hợp lệ thì tạo ra một thông báo lỗi và lưu trữ vào ModelState
+    if (string.IsNullOrWhiteSpace(data.FullName))
+      ModelState.AddModelError(nameof(data.FullName), "Tên nhân viên không được để trống");
+    if (string.IsNullOrEmpty(_BirthDate))
+      ModelState.AddModelError(nameof(data.BirthDate), "Vui lòng nhập ngày sinh cho nhân viên");
+    if (string.IsNullOrWhiteSpace(data.Phone))
+      ModelState.AddModelError(nameof(data.Phone), "Vui lòng nhập điện thoại của nhân viên");
+    if (string.IsNullOrWhiteSpace(data.Email))
+      ModelState.AddModelError(nameof(data.Email), "Vui lòng nhập email của nhân viên");
+    if (string.IsNullOrWhiteSpace(data.Address))
+      ModelState.AddModelError(nameof(data.Address), "Vui lòng nhập địa chỉ của nhân viên");
+
     //Xử lí cho ngày sinh
     DateTime? d = _BirthDate.ToDateTime();
     if (d.HasValue)
       data.BirthDate = d.Value;
+    else
+    {
+      ModelState.AddModelError(nameof(data.BirthDate), "Ngày sinh của nhân viên không hợp lệ");
+      return View("Edit", data);
+    }
     //Xử lí với ảnh
     if (_Photo != null)
     {
@@ -79,15 +113,39 @@ public class EmployeeController : Controller
       }
       data.Photo = fileName;
     }
-    if (data.EmployeeID == 0)
+    //Dựa vào thuộc tính IsValid của ModelState để biết có tồn tại lỗi hay không?
+    if (ModelState.IsValid == false)
     {
-      CommonDataService.AddEmployee(data);
+      return View("Edit", data);
     }
-    else
-    {
-      CommonDataService.UpdateEmployee(data);
-    }
-    return RedirectToAction("Index");
-  }
 
+    try
+    {
+      if (data.EmployeeID == 0)
+      {
+        int id = CommonDataService.AddEmployee(data);
+        if (id <= 0)
+        {
+          ModelState.AddModelError(nameof(data.Email), "Email bị trùng");
+          return View("Edit", data);
+        }
+      }
+      else
+      {
+        bool result = CommonDataService.UpdateEmployee(data);
+        if (result == false)
+        {
+          ModelState.AddModelError(nameof(data.Email), "Email bị trùng");
+          return View("Edit", data);
+        }
+      }
+      return RedirectToAction("Index");
+
+    }
+    catch
+    {
+      ModelState.AddModelError("Error", "Hệ thống tạm thời gián đoạn");
+      return View("Edit");
+    }
+  }
 }
