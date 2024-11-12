@@ -95,7 +95,7 @@ public class EmployeeController : Controller
 
     //Xử lí cho ngày sinh
     DateTime? d = _BirthDate.ToDateTime();
-    if (d.HasValue)
+    if (d.HasValue && d >= new DateTime(1753, 1, 1))
       data.BirthDate = d.Value;
     else
     {
