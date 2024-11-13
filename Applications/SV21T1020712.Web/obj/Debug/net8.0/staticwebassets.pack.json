@@ -53,8 +53,28 @@
       "PackagePath": "staticwebassets/images/employees/nophoto.png"
     },
     {
+      "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/images/products/638671313811301780_ava4.jpeg",
+      "PackagePath": "staticwebassets/images/products/638671313811301780_ava4.jpeg"
+    },
+    {
       "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/images/products/macbook.png",
       "PackagePath": "staticwebassets/images/products/macbook.png"
+    },
+    {
+      "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/images/products/photos/638671315156365280_ava3.jpeg",
+      "PackagePath": "staticwebassets/images/products/photos/638671315156365280_ava3.jpeg"
+    },
+    {
+      "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/images/products/photos/638671315261409310_ava2.jpeg",
+      "PackagePath": "staticwebassets/images/products/photos/638671315261409310_ava2.jpeg"
+    },
+    {
+      "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/images/products/photos/638671315997560450_ava2.jpeg",
+      "PackagePath": "staticwebassets/images/products/photos/638671315997560450_ava2.jpeg"
+    },
+    {
+      "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/images/products/photos/638671317830956810_ava2.jpeg",
+      "PackagePath": "staticwebassets/images/products/photos/638671317830956810_ava2.jpeg"
     },
     {
       "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/js/site.js",

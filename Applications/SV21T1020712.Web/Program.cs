@@ -52,4 +52,8 @@ ApplicationContext.Configure(
     enviroment: app.Services.GetRequiredService<IWebHostEnvironment>()
 );
 
+//Khởi tạo cấu hình cho BusinessLayer
+string connectionString = builder.Configuration.GetConnectionString("LiteCommerceDB");
+SV21T1020712.BusinessLayers.Configuration.Initialize(connectionString);
+
 app.Run();

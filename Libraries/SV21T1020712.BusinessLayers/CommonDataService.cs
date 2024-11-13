@@ -13,7 +13,7 @@ namespace SV21T1020712.BusinessLayers
         private static readonly ISimpleQueryDAL<Province> provinceDB;
         static CommonDataService()
         {
-            string connectionString = @"server=.;user id=sa;password=Password123456789;database=LiteCommerceDB;TrustServerCertificate=true";
+            string connectionString = Configuration.ConnectionString;
             customerDB = new DataLayers.SQLServer.CustomerDAL(connectionString);
             shipperDB = new DataLayers.SQLServer.ShipperDAL(connectionString);
             supplierDB = new DataLayers.SQLServer.SupplierDAL(connectionString);
@@ -123,6 +123,11 @@ namespace SV21T1020712.BusinessLayers
             return shipperDB.InUsed(id);
         }
 
+        public static List<Supplier> ListOfSuppliers(string searchValue = "")
+        {
+            return supplierDB.List();
+        }
+
         public static List<Supplier> ListOfSuppliers(out int rowCount, int page = 1, int pageSize = 0, string searchValue = "")
         {
             rowCount = supplierDB.Count(searchValue);
@@ -155,6 +160,11 @@ namespace SV21T1020712.BusinessLayers
         public static bool InUsedSupplier(int id)
         {
             return supplierDB.InUsed(id);
+        }
+
+        public static List<Category> ListOfCategories(string searchValue = "")
+        {
+            return categoryDB.List();
         }
 
         public static List<Category> ListOfCategories(out int rowCount, int page = 1, int pageSize = 0, string searchValue = "")

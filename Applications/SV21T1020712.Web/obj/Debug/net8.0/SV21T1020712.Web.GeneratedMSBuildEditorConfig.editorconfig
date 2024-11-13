@@ -130,6 +130,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdC9QaG90by5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Product/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdC9TZWFyY2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
