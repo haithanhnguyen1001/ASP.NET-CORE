@@ -97,7 +97,7 @@ public class ShipperController : Controller
         int id = CommonDataService.AddShipper(data);
         if (id <= 0)
         {
-          ModelState.AddModelError(nameof(data.Phone), "Số điện thoại bị trùng");
+          ModelState.AddModelError(nameof(data.ShipperName), "Tên người giao hàng bị trùng");
           return View("Edit", data);
         }
       }
@@ -106,7 +106,7 @@ public class ShipperController : Controller
         bool result = CommonDataService.UpdateShipper(data);
         if (result == false)
         {
-          ModelState.AddModelError(nameof(data.Phone), "Số điện thoại bị trùng");
+          ModelState.AddModelError(nameof(data.ShipperName), "Tên người giao hàng bị trùng");
           return View("Edit", data);
         }
       }

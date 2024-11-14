@@ -18,8 +18,9 @@
             <div class="form-group">
                 <div class="col-lg-offset-2 col-sm-10">
                     <input type="hidden" name="@nameof(Model.Photo)" value="@Model.Photo" />
-                    <img id="Photo" src="~/images/products/photos/@Model.Photo" class="img img-bordered"
-                        style="width:200px; object-fit:cover; background: silver" />
+                    <img id="Photo"
+                        src="~/images/products/photos/@(string.IsNullOrEmpty(Model.Photo) ? "nophoto.png" : Model.Photo)"
+                        class="img img-bordered" style="width:200px" />
                 </div>
             </div>
 

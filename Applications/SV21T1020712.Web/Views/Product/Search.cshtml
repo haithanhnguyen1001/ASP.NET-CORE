@@ -23,9 +23,8 @@
       {
         <tr>
           <td>
-            <img src="@(string.IsNullOrEmpty(item.Photo) ? "" : Url.Content($"~/images/products/{item.Photo}"))"
-              style="width: 120px; object-fit: cover; background: silver;
-                                                                    @(string.IsNullOrEmpty(item.Photo) ? "height: 70px;" : "")" alt="" />
+            <img id="Photo" src="~/images/products/@(string.IsNullOrEmpty(item.Photo) ? "nophoto.png" : item.Photo)"
+              class="img img-bordered" style="width:120px; object-fit: cover;" />
           </td>
           <td>
             @item.ProductName

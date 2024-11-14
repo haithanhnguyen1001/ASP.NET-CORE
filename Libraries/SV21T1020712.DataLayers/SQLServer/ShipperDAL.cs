@@ -17,7 +17,7 @@ namespace SV21T1020712.DataLayers.SQLServer
             using (var connection = OpenConnection())
             {
                 var sql = @"
-                if exists(select * from Shippers where Phone = @Phone)
+                if exists(select * from Shippers where ShipperName = @ShipperName)
                     select -1
                 else
                 begin
@@ -141,7 +141,7 @@ namespace SV21T1020712.DataLayers.SQLServer
             using (var connection = OpenConnection())
             {
                 var sql = @"
-                if not exists(select * from Shippers where ShipperID <> @ShipperID and Phone = @Phone)
+                if not exists(select * from Shippers where ShipperID <> @ShipperID and ShipperName = @ShipperName)
                 begin
                     update Shippers
                         set ShipperName = @ShipperName,
