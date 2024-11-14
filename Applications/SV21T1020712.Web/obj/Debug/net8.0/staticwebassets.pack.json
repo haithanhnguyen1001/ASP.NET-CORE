@@ -65,6 +65,10 @@
       "PackagePath": "staticwebassets/images/products/638671599322985790_porsche.jpg"
     },
     {
+      "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/images/products/638671608736014540_amg.jpg",
+      "PackagePath": "staticwebassets/images/products/638671608736014540_amg.jpg"
+    },
+    {
       "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/images/products/macbook.png",
       "PackagePath": "staticwebassets/images/products/macbook.png"
     },
@@ -95,6 +99,14 @@
     {
       "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/images/products/photos/638671323836464760_ava2.jpeg",
       "PackagePath": "staticwebassets/images/products/photos/638671323836464760_ava2.jpeg"
+    },
+    {
+      "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/images/products/photos/638671608838679640_dauxeamg.jpg",
+      "PackagePath": "staticwebassets/images/products/photos/638671608838679640_dauxeamg.jpg"
+    },
+    {
+      "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/images/products/photos/638671609015403000_thantrenamg.jpg",
+      "PackagePath": "staticwebassets/images/products/photos/638671609015403000_thantrenamg.jpg"
     },
     {
       "Id": "/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/wwwroot/images/products/photos/nophoto.png",
