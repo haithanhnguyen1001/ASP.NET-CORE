@@ -14,7 +14,6 @@
       <tr class="bg-primary">
         <th>Khách hàng</th>
         <th>Ngày lập</th>
-
         <th>Nhân viên phụ trách</th>
         <th>Thời điểm duyệt</th>
         <th>Người giao hàng</th>
@@ -29,7 +28,7 @@
       {
         <tr>
           <td>@item.CustomerName</td>
-          <td>@item.OrderTime</td>
+          <td>@item.OrderTime.ToString("dd/MM/yyyy HH:mm", new System.Globalization.CultureInfo("en-GB"))</td>
           <td>@item.EmployeeName</td>
           <td>@item.AcceptTime</td>
           <td>@item.ShipperName</td>

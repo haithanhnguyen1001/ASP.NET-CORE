@@ -10,14 +10,14 @@
             <input type="hidden" name="@nameof(Model.PageSize)" value="@Model.PageSize" />
             <div class="row container-fluid">
                 <div class="col-sm-2">
-                    <select class="form-control" name="@nameof(Model.Status)">
-                        <option value="0">-- Trạng thái --</option>
-                        <option value="1">Đơn hàng mới (chờ duyệt)</option>
-                        <option value="2">Đơn hàng đã duyệt (chờ chuyển hàng)</option>
-                        <option value="3">Đơn hàng đang được giao</option>
-                        <option value="4">Đơn hàng đã hoàn tất thành công</option>
-                        <option value="-1">Đơn hàng bị hủy</option>
-                        <option value="-2">Đơn hàng bị từ chối</option>
+                    <select class="form-control" name="@nameof(Model.Status)" value="@Model.Status">
+                        <option value="0" selected="@(Model.Status == 0)">-- Trạng thái --</option>
+                        <option value="1" selected="@(Model.Status == 1)">Đơn hàng mới (chờ duyệt)</option>
+                        <option value="2" selected="@(Model.Status == 2)">Đơn hàng đã duyệt (chờ chuyển hàng)</option>
+                        <option value="3" selected="@(Model.Status == 3)">Đơn hàng đang được giao</option>
+                        <option value="4" selected="@(Model.Status == 4)">Đơn hàng đã hoàn tất thành công</option>
+                        <option value="-1" selected="@(Model.Status == -1)">Đơn hàng bị hủy</option>
+                        <option value="-2" selected="@(Model.Status == -2)">Đơn hàng bị từ chối</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
