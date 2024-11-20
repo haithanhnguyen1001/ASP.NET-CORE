@@ -30,10 +30,12 @@
           <td>@item.CustomerName</td>
           <td>@item.OrderTime.ToString("dd/MM/yyyy HH:mm", new System.Globalization.CultureInfo("en-GB"))</td>
           <td>@item.EmployeeName</td>
-          <td>@item.AcceptTime</td>
+          <td>@string.Format(new System.Globalization.CultureInfo("en-GB"), "{0:dd/MM/yyyy HH:mm}", item.AcceptTime)</td>
           <td>@item.ShipperName</td>
-          <td>@item.ShippedTime</td>
-          <td>@item.FinishedTime</td>
+          <td> @string.Format(new System.Globalization.CultureInfo("en-GB"), "{0:dd/MM/yyyy HH:mm}", item.ShippedTime)
+          </td>
+          <td> @string.Format(new System.Globalization.CultureInfo("en-GB"), "{0:dd/MM/yyyy HH:mm}", item.FinishedTime)
+          </td>
           <td>@item.StatusDescription</td>
           <td>
             <a href="~/Order/Details/@item.OrderID" class="btn btn-info btn-xs">

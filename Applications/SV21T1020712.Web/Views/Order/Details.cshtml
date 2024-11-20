@@ -95,7 +95,7 @@
             </div>
             <label class="control-label col-sm-2">Nhận giao hàng lúc:</label>
             <div class="col-sm-4">
-                <p class="form-control">@Model.Order.ShippedTime</p>
+                <p class="form-control">@string.Format(new System.Globalization.CultureInfo("en-GB"), "{0:dd/MM/yyyy HH:mm}", Model.Order.ShippedTime )</p>
             </div>
         </div>
 
@@ -106,7 +106,7 @@
             </div>
             <label class="control-label col-sm-2">Thời điểm hoàn tất:</label>
             <div class="col-sm-4">
-                <p class="form-control">@Model.Order.FinishedTime</p>
+                <p class="form-control"> @string.Format(new System.Globalization.CultureInfo("en-GB"), "{0:dd/MM/yyyy HH:mm}", Model.Order.FinishedTime)</p>
             </div>
         </div>
     </div>
