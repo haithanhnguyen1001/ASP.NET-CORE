@@ -25,6 +25,16 @@ namespace SV21T1020712.BusinessLayers
         {
             return provinceDB.List();
         }
+
+        // public static List<Customer> ListOfCustomers()
+        // {
+        //     return customerDB.List();
+        // }
+
+        public static List<Customer> ListOfCustomers(string searchValue = "")
+        {
+            return customerDB.List(1, 0, searchValue).ToList();
+        }
         /// <summary>
         ///     Tìm kiếm và lấy danh sách khách hàng dưới dạng phân trang
         /// </summary>

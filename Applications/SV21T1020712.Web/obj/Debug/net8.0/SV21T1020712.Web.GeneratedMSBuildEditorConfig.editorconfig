@@ -110,8 +110,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvU2VhcmNoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Order/SearchProduct.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvU2VhcmNoUHJvZHVjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Order/Shipping.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvU2hpcHBpbmcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Order/ShoppingCart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvU2hvcHBpbmdDYXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/nhthanh/SV21T1020712/Applications/SV21T1020712.Web/Views/Product/Attribute.cshtml]
