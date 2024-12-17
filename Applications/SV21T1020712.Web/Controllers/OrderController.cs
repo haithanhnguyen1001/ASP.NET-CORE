@@ -180,14 +180,88 @@ public class OrderController : Controller
     return Json(orderID);
   }
 
-  public IActionResult EditDetail(int id = 0, int productId = 0)
+
+  public IActionResult Accept(int id = 0)
   {
-    return View();
+    bool result = OrderDataService.AcceptOrder(id);
+    if (!result)
+      TempData["Message"] = "Không thể duyệt đơn hàng này";
+    return RedirectToAction("Details", new { id });
   }
+  public IActionResult Finish(int id = 0)
+  {
+    bool result = OrderDataService.FinishOrder(id);
+    if (!result)
+      TempData["Message"] = "Không thể ghi nhận trạng thái kết thúc cho đơn hàng này";
+    return RedirectToAction("Details", new { id });
+  }
+
+  public IActionResult Cancel(int id = 0)
+  {
+    bool result = OrderDataService.CancelOrder(id);
+    if (!result)
+      TempData["Message"] = "Không thể thực hiện thao tác hủy đối với đơn hàng này";
+    return RedirectToAction("Details", new { id });
+  }
+  public IActionResult Reject(int id = 0)
+  {
+    bool result = OrderDataService.RejectOrder(id);
+    if (!result)
+      TempData["Message"] = "Không thể thực hiện thao tác từ chối đối với đơn hàng này";
+    return RedirectToAction("Details", new { id });
+  }
+
+  public IActionResult Delete(int id = 0)
+  {
+    bool result = OrderDataService.DeleteOrder(id);
+    if (!result)
+    {
+      TempData["Message"] = "Không thể xóa đơn hàng này";
+      return RedirectToAction("Details", new { id });
+    }
+    return RedirectToAction("Index");
+  }
+
+  [HttpGet]
   public IActionResult Shipping(int id = 0)
   {
+    ViewBag.OrderID = id;
     return View();
   }
 
+  [HttpPost]
+  public IActionResult Shipping(int id = 0, int shipperID = 0)
+  {
+    if (shipperID <= 0)
+      return Json("Vui lòng chọn người giao hàng");
 
+    bool result = OrderDataService.ShipOrder(id, shipperID);
+    return Json("");
+  }
+
+  public IActionResult DeleteDetail(int id = 0, int productId = 0)
+  {
+    bool result = OrderDataService.DeleteOrderDetail(id, productId);
+    if (!result)
+      TempData["Message"] = "Không thể xóa mặt hàng ra khỏi đơn hàng";
+    return RedirectToAction("Details", new { id });
+  }
+
+  [HttpGet]
+  public IActionResult EditDetail(int id = 0, int productId = 0)
+  {
+    var model = OrderDataService.GetOrderDetail(id, productId);
+    return View(model);
+  }
+
+  [HttpPost]
+  public IActionResult UpdateDetail(int OrderID, int productID, int quantity, decimal salePrice)
+  {
+    if (quantity <= 0)
+      return Json("Số lượng bán không hợp lệ");
+    if (salePrice < 0)
+      return Json("Giá bán không hợp lệ");
+    bool result = OrderDataService.SaveOrderDetail(OrderID, productID, quantity, salePrice);
+    return Json("");
+  }
 }

@@ -104,6 +104,11 @@ namespace SV21T1020712.BusinessLayers
             return shipperDB.List(page, pageSize, searchValue);
         }
 
+        public static List<Shipper> ListOfShippers(string searchValue = "")
+        {
+            return shipperDB.List(1, 0, searchValue).ToList();
+        }
+
         public static Shipper? GetShipper(int id)
         {
             return shipperDB.Get(id);

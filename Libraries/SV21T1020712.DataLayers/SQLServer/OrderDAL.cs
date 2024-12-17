@@ -25,7 +25,7 @@ namespace SV21T1020712.DataLayers.SQLServer
                     DeliveryProvince = data.DeliveryProvince ?? "",
                     DeliveryAddress = data.DeliveryAddress ?? "",
                     EmployeeID = data.EmployeeID,
-                    Status = 1,
+                    Status = SV21T1020712.DomainModels.Constants.ORDER_INIT,
                 };
                 id = connection.ExecuteScalar<int>(sql: sql, param: parameters, commandType: CommandType.Text);
                 connection.Close();

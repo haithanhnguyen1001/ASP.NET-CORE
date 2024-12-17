@@ -183,8 +183,7 @@ namespace SV21T1020712.BusinessLayers
         /// - Nếu mặt hàng chưa có trong chi tiết đơn hàng thì bổ sung
         /// - Nếu mặt hàng đã có trong chi tiết đơn hàng thì cập nhật lại số lượng và giá bán
         /// </summary>
-        public static bool SaveOrderDetail(int orderID, int productID,
-        int quantity, decimal salePrice)
+        public static bool SaveOrderDetail(int orderID, int productID, int quantity, decimal salePrice)
         {
             Order? data = orderDB.Get(orderID);
             if (data == null)
